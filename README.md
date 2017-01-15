@@ -5,4 +5,4 @@ Maturitná práca - praktická časť
 
 Blog o IT a webovom vývojarstve
 
-4.B - ITS
+SPŠE K. Adlera - ITS 4.B
