@@ -1,5 +1,16 @@
 <?php
 
+    function register_user($register_data) {
+
+        array_walk($register_data, 'array_sanitize');
+        $register_data['heslo'] = md5($register_data['heslo']);
+        print_r($register_data);
+
+        $fields = '`' . implode('`, `', array_keys($register_data)) . '`'; // vrati meno hodnoty
+        $data = '\'' . implode('\', \'', $register_data) . '\'';           // vrati hodnoty z registracie
+
+        mysql_query("INSERT INTO `users` ($fields) VALUES ($data)");
+    }
 
     function user_data($user_id) {
 
@@ -29,6 +40,13 @@
 
         $meno = sanitize($meno);
         return (mysql_result(mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE `meno` = '$meno' "), 0) == 1) ? true : false;
+
+    }
+
+    function email_exists($email) {
+
+        $email = sanitize($email);
+        return (mysql_result(mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE `email` = '$email' "), 0) == 1) ? true : false;
 
     }
 
