@@ -1,0 +1,140 @@
+// tu sa budú importovať všetky čiastočné .scss súbory
+// tento krok sa robí iba kvôli prehliadnosti kódu
+
+@import "premenne";
+@import "mixins";
+@import "menu";
+@import "buttons";
+@import "clanky";
+@import "login";
+
+@font-face {
+  font-family: Roboto;
+  src: url(/fonts/Roboto-Regular.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(/fonts/Roboto-Bold.ttf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(/fonts/Roboto-Light.ttf);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(/fonts/Roboto-Medium.ttf);
+  font-weight: 500;
+}
+
+
+
+body {
+  position: relative;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a{
+  padding: 0;
+  margin: 0;
+  letter-spacing: 1px;
+  font-family: "Roboto";
+  font-weight:300;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body {
+  background: $bg;
+}
+
+
+header {
+
+  position: relative;
+  height: 500px;
+  width: 100%;
+  padding-top: 50px;
+  background: url(/img/header.jpeg);
+  background-position: center center;
+  background-size: 100% 100%;
+  border-bottom: 3px solid $main;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow:    0px 0px 10px 0px rgba(0,0,0,0.5);
+  box-shadow:         0px 0px 10px 0px rgba(0,0,0,0.5);
+  @include align-vh();
+  overflow: hidden;
+  flex-direction: column;
+
+  .darken {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    top:0;
+    z-index: 2;
+  }
+
+  .welcome {
+
+    color: white;
+    text-align: center;
+    position: relative;
+    z-index: 4;
+    transform: translateY(-250px);
+
+    @include trans(transform, 0.5s);
+
+    &.hide {
+      transform: translateY(400px);
+      //z-index: -2;
+    }
+
+    h3 {
+      text-shadow: 1px 1px rgba(0,0,0,8);
+      font-weight: normal;
+    }
+
+    .welcome-btn {
+      display: block;
+      color: white;
+      background: rgba(0,0,0,0.55);
+      padding: 20px 0;
+      width: 200px;
+      font-size: 20px;
+      text-align: center;
+      @include border-radius(5px);
+      @include trans-all(0.5s);
+      margin: 30px auto 0 auto;
+
+      &:hover {
+        letter-spacing: 2px;
+        background: rgba(0,0,0,0.6);
+      }
+
+    }
+  }
+}

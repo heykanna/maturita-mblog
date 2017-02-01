@@ -1,0 +1,80 @@
+// v tomto súbore budú všetky užitočné mixiny pre ulahčenie práce a skrátenie kódu
+
+
+// tieto "mixiny" sú určené pre responzivitu webu, slúžia ako skratky pre "@media" query
+/* ------ */
+// pre mobilné rozlíšenia
+@mixin mobil {
+  @media only screen and (max-width: 700px) {
+    @content;
+  }
+}
+
+// pre tablety
+@mixin tablet {
+  @media only screen and (max-width: 1000px) {
+    @content;
+  }
+}
+
+// iba pre desktop rozlíšenia
+@mixin desktop {
+  @media only screen and (min-width: 999px) {
+    @content;
+  }
+}
+/* ------ */
+
+
+// skratka príkazu "border-radius" pre podporu všetkých prehliadačov
+@mixin border-radius($x) {
+  -webkit-border-radius:$x;
+  -moz-border-radius:$x;
+  border-radius:$x;
+}
+
+// vertikálne a horizontálne zarovnanie obsahu
+@mixin align-vh() {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+// horizontálne zarovnanie obsahu
+@mixin align-h() {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  justify-content:center;
+}
+
+// vertikálne zarovnanie obsahu
+@mixin align-v() {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  align-items:center;
+}
+
+// skratka príkazu "transition" pre podporu všetkých prehliadačov
+@mixin trans-all($cas) {
+  -webkit-transition: all $cas;
+  -moz-transition: all $cas;
+  -ms-transition: all $cas;
+  -o-transition: all $cas;
+  transition: all $cas;
+}
+
+// skratka príkazu "transition" ( špecifická hodnota ) pre podporu všetkých prehliadačov
+@mixin trans($hodnota, $cas) {
+  -webkit-transition: $hodnota $cas;
+  -moz-transition: $hodnota $cas;
+  -ms-transition: $hodnota $cas;
+  -o-transition: $hodnota $cas;
+  transition: $hodnota $cas;
+}
