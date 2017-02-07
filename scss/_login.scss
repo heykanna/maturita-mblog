@@ -10,12 +10,12 @@
   background: rgba(0,0,0,0.3);
   border: 1px solid $main;
   border-radius: 5px;
-  transform: translateY(-400px);
+  transform: translateY(-450px);
   z-index: 4;
   @include trans(transform, 0.5s);
 
   &.show {
-    transform: translateY(100px);
+    transform: translateY(35px);
   }
 
 
@@ -90,6 +90,7 @@
       color: white;
     }
   }
+
 }
 
 .dark-bg {

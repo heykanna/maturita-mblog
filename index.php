@@ -8,6 +8,10 @@
 
     include 'templates/head.php';
 
+    if (isset($_GET['logged']) && empty($_GET['logged'])) {
+        echo '<div class="message">Logged in :)</div>';
+    }
+
 ?>
 
 
@@ -31,7 +35,7 @@
             <img src="http://placehold.it/200x200">
         </div>
 
-        <h2 class="article-nazov">Názov článku</h2> <h2 class="article-hodnotenie">8.5 / 10</h2>
+        <a href="#" class="article-nazov">Názov článku</a> <h2 class="article-hodnotenie">8.5 / 10</h2>
         <div class="info">
             <span class="autor">Marek Rieger</span> | <span class="datum">15. mája 2017</span> | <span class="komentare">10 komentárov</span>
         </div>
@@ -53,59 +57,41 @@
         </div>
     </div>
 
-    <div class="article">
-        <div class="img-wrap">
-            <img src="http://placehold.it/200x200">
-        </div>
+    <?php
 
-        <h2 class="article-nazov">Názov článku</h2> <h2 class="article-hodnotenie">8.5 / 10</h2>
-        <div class="info">
-            <span class="autor">Marek Rieger</span> | <span class="datum">15. mája 2017</span> | <span class="komentare">10 komentárov</span>
-        </div>
+        $sql = "SELECT * FROM posts ORDER BY id DESC";
 
-        <div class="obash">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Nulla nulla purus, posuere a maximus nec, luctus ut diam.
-                Nulla semper at mi in gravida. Suspendisse ornare vel sem ac posuere.
-                Aliquam vehicula laoreet gravida. Sed scelerisque ullamcorper turpis,
-                a consequat leo ultrices eu. Nam scelerisque, justo non ornare interdum,
-                ex lectus auctor odio, sit amet cursus tortor ante nec nunc.
-                Aliquam scelerisque tincidunt eros eget mollis. Ut vel leo condimentum,
-                pellentesque odio in, luctus dui. Praesent nec viverra metus,
-                id bibendum leo.
+        $result = mysqli_query($db, $sql) or die (mysqli_error());
 
+        $posts = "";
 
-            </p>
-        </div>
-    </div>
+        if(mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
 
-    <div class="article">
-        <div class="img-wrap">
-            <img src="http://placehold.it/200x200">
-        </div>
+                $id = $row['id'];
+                $title = $row['title'];
+                $content = $row['content'];
+                $date = $row['date'];
 
-        <h2 class="article-nazov">Názov článku</h2> <h2 class="article-hodnotenie">8.5 / 10</h2>
-        <div class="info">
-            <span class="autor">Marek Rieger</span> | <span class="datum">15. mája 2017</span> | <span class="komentare">10 komentárov</span>
-        </div>
+                $admin = ""; // add edit/delete later
 
-        <div class="obash">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Nulla nulla purus, posuere a maximus nec, luctus ut diam.
-                Nulla semper at mi in gravida. Suspendisse ornare vel sem ac posuere.
-                Aliquam vehicula laoreet gravida. Sed scelerisque ullamcorper turpis,
-                a consequat leo ultrices eu. Nam scelerisque, justo non ornare interdum,
-                ex lectus auctor odio, sit amet cursus tortor ante nec nunc.
-                Aliquam scelerisque tincidunt eros eget mollis. Ut vel leo condimentum,
-                pellentesque odio in, luctus dui. Praesent nec viverra metus,
-                id bibendum leo.
+                $posts .= "<div class='article'>
+                           <div class='img-wrap'><img src='http://placehold.it/200x200'></div>
+                           <a class='article-nazov' href='view_post.php?pid=$id'>$title</a>
+                           <div class='info'>
+                           <span class='autor'>Marek Rieger</span> | <span class='datum'>$date</span>
+                           </div>
+                           <div class='obsah'><p>$content</p></div>
+                           </div>";
+            }
+            echo $posts;
+        } else {
+            echo "Nenašli sa žiadne príspevky";
+        }
+
+    ?>
 
 
-            </p>
-        </div>
-    </div>
 
 </section>
 

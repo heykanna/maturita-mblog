@@ -2,6 +2,7 @@
 
     include 'db/init.php';
 
+
     if (empty($_POST) === false) {
 
         $meno = $_POST['meno'];
@@ -18,12 +19,12 @@
                 $errors[] = 'Nesprávne meno alebo heslo';
             } else {
                 $_SESSION['user_id'] = $login;
-                header('Location: index.php');
+                header('Location: index.php?logged');
                 exit();
             }
         }
 
-        print_r($errors);
+        echo error_output($errors);
 
     }
 

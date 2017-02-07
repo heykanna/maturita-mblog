@@ -27,7 +27,7 @@
             $fields = '`' . implode('`, `', $args) . '`';
             $data = mysql_fetch_assoc(mysql_query("SELECT $fields FROM `users` WHERE `user_id` = $user_id"));
 
-            print_r($data);
+            //print_r($data);
         }
 
     }
@@ -39,15 +39,13 @@
     function user_exists($meno) {
 
         $meno = sanitize($meno);
-        return (mysql_result(mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE `meno` = '$meno' "), 0) == 1) ? true : false;
-
+        return (mysql_result(mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE `meno` = '$meno'"), 0) == 1) ? true : false;
     }
 
     function email_exists($email) {
 
         $email = sanitize($email);
-        return (mysql_result(mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE `email` = '$email' "), 0) == 1) ? true : false;
-
+        return (mysql_result(mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE `email` = '$email'"), 0) == 1) ? true : false;
     }
 
     function get_id($meno) {
