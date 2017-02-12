@@ -4,17 +4,33 @@
 
         <?php
 
-        if (login_check() === true) {
+        if (isset($_SESSION['id'])) {
             echo '<li><a class="logout-btn" href="logout.php">LOG OUT</a></li>';
+
         } else {
             echo '<li><a class="login-btn" href="#">LOGIN</a></li>';
         }
+
+
 
         ?>
 
 
         <li><img src="img/mlogowhite.png"></li>
-        <li><a href="#">KONTAKT</a></li>
-        <li><a href="#">ADLERKA</a></li>
+
+        <?php
+
+        if (isset($_SESSION['id'])) {
+            echo "<li><a href='#'>PROFIL<div class='user'>";
+            echo $_SESSION['meno'];
+            echo "</div></a></li>";
+        } else {
+            echo "<li><a href='http://www.adlerka.sk'>ADLERKA</a></li>";
+        }
+
+        ?>
+        <li><a href="#">INFO</a></li>
+
+
     </ul>
 </nav>

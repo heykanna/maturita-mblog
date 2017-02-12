@@ -11,7 +11,7 @@
     <meta http-equiv="content-language" content="sk">
     <meta http-equiv="content-language" content="sk-sk">
 
-    <title>Marek Maturita</title>
+    <title>mBlog</title>
 
     <link rel="stylesheet" href="css/main.css">
 

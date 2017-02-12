@@ -1,44 +1,44 @@
 <?php
 
+require('db/connect.php');
+
+if(isset($_POST['register'])) {
+
+    $meno       = $_POST['meno'];
+    $heslo      = $_POST['heslo'];
+    $heslo_r    = $_POST['heslo_repeat'];
+    $email      = $_POST['email'];
+
+    $exists = 0;
+    $result = $db->query("SELECT meno FROM users WHERE meno='{$meno}' LIMIT 1");
+    if ($result->num_rows == 1) {
+        $exists = 1;
+    } else {
+        $result = $db->query("SELECT email FROM users WHERE email='{$email}' LIMIT 1");
+        if($result->num_rows ==1) $exists = 2;
+    }
+
+    if($heslo !== $heslo_r) $exists = 3;
 
 
-    if (empty($_POST) === false) {
+    $heslo = md5($heslo);
 
-        $register_info = array('meno', 'email', 'heslo', 'heslo_repeat');
+    if($exists == 0) {
+        $sql = "INSERT INTO `users` (`meno`, `email`, `heslo`) VALUES ('{$meno}', '{$email}', '{$heslo}')";
+    } else {
+        header("Location: index.php?regsiter_fail");
+        exit();
+    }
 
-        foreach($_POST as $key=>$value) {
-            if(empty($value) && in_array($key, $register_info) === true) { // ak je jeden z itemov prazdny
-
-                $errors[] = 'VYPLNTE VŠETKY ÚDAJE';
-                break 1;
-
-            }
-        }
-
-        // validácia údajov
-        if(empty($errors) === true) {
-            if (user_exists($_POST['meno']) === true) {
-                $errors[] = 'Toto meno je už obsadené.';
-            }
-            if (preg_match("/\\s/", $_POST['meno']) == true) {
-                $errors[] = 'Meno nesmie obsahovať medzery.';
-            }
-            if (strlen($_POST['heslo']) < 6) {
-                $errors[] = 'Heslo musí mať aspoň 6 znakov.';
-            }
-            if ($_POST['heslo'] !== $_POST['heslo_repeat']) {
-                $errors[] = 'Heslá sa musia zhodovať.';
-            }
-            if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
-                $errors[] = 'Zadajte správnu emailovú adresu.';
-            }
-            if (email_exists($_POST['email']) === true) {
-                $errors[] = 'Uživateľ s touto emailovou adresou už existuje';
-            }
-
-        }
+    if($db->query($sql)) {
+        header("Location: index.php?register_success");
+    } else {
+        header("Location: index?php?register_query_fail");
     }
 
 
+
+
+}
 
 ?>

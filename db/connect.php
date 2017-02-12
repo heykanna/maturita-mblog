@@ -1,7 +1,7 @@
 <?php
-
-    $connect_error = 'DB ERROR';
-    $db = mysqli_connect('localhost', 'root', '', 'mblog');
-
-
+    $db = new mysqli('localhost', 'root', '', 'mblog');
+    if($db->connect_errno) {
+        echo 'DB CONNECT ERROR';
+        exit();
+    }
 ?>

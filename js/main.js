@@ -36,8 +36,6 @@ $(function() {
         login.removeClass('show');
     });
 
-
-
 });
 
 

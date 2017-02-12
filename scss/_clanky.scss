@@ -2,19 +2,42 @@
 
   position: relative;
   z-index: 3;
-
+  width: 1100px;
+  margin: 0 auto;
+  max-width: 90%;
 
   .article {
 
-    margin: 20px auto;
+    margin: 20px 0;
     padding: 15px;
     border-top: 2px solid $main;
-    width: 1100px;
     height: 200px;
-    max-width: 90%;
     background: white;
     display: block;
     overflow: hidden;
+    position: relative;
+
+
+    &.view {
+      height: auto;
+      margin-top: 10px !important;
+    }
+
+    .post {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+
+      a {
+        &:hover {
+          color: $main;
+        }
+      }
+
+      &.edit {
+        right: 100px;
+      }
+    }
 
     &:first-of-type {
       margin-top: 50px;
@@ -34,12 +57,12 @@
 
       img {
         width: 100%;
-        height: 100%;
+        //height: 100%;
       }
     }
 
     .article-nazov,
-    .article-hodnotenie{
+    .article-hodnotenie {
       font-weight: 500;
       display: inline;
     }
@@ -49,7 +72,6 @@
       padding: 5px 10px;
       color: white;
       margin-left: -10px;
-      margin-top: 5px;
       @include trans(background, 0.3s);
 
       &:hover {
@@ -67,10 +89,9 @@
       }
     }
 
-
     .info {
       display: block;
-      margin-top: 15px;
+      margin: 15px 0;
 
       span {
         margin: 0 5px;
@@ -99,5 +120,124 @@
       overflow: hidden;
     }
   }
+}
 
+
+.article_edit {
+
+  width: 500px;
+  margin: 50px auto;
+  max-width: 90%;
+
+
+
+  input {
+    display: block;
+    width:calc(100% - 20px);
+    outline: none;
+    border: none;
+    padding: 10px;
+  }
+
+  textarea {
+    width: calc(100% - 20px);
+    resize: none;
+    height: 100px;
+    outline:none;
+    border: none;
+    padding: 10px;
+  }
+
+  input[type="submit"] {
+    background: $main;
+    width: auto;
+    padding: 10px 15px;
+    font-size: 15px;
+    text-align: right;
+    float: right;
+    color: white;
+    outline: none;
+    border: none;
+    margin-top: 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.comments{
+  width: 1110px;
+  max-width: 90%;
+  margin: 0 auto;
+
+  form {
+
+    position: relative;
+    width: 550px;
+
+    textarea {
+      resize: none;
+      border: none;
+      outline: none;
+      width: 100%;
+      height: 100px;
+      padding: 15px;
+    }
+
+    input {
+      display: block;
+      background: $main;
+      color: white;
+      outline: none;
+      border: none;
+      padding: 5px 10px;
+      position: absolute;
+      right: -20px;
+      bottom: 10px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  h2 {
+    background: $main;
+    padding: 5px 10px;
+    color: white;
+    display: inline-block;
+    margin: 10px 0;
+  }
+
+  .comment_wrap {
+    padding: 15px;
+    background: white;
+    position: relative;
+    width: 550px;
+    max-width: 90%;
+    display: flex;
+    margin: 10px 0;
+  }
+
+  .comment_meno {
+    margin-right: 10px;
+    font-weight: bold;
+
+
+    &:after {
+      content: "|";
+      margin-left: 10px;
+    }
+  }
+
+  .comment_body {
+
+    display: inline-block;
+  }
+
+  .del_comment {
+    position: absolute;
+    right: 10px;
+  }
 }

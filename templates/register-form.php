@@ -1,29 +1,6 @@
-<?php
-    include 'register.php';
 
-    if (isset($_GET['success']) && empty($_GET['success'])) {
-        echo '<div class="message">Registrácia prebehla úspešne ! :)</div>';
-    }
 
-    if (empty($_POST) === false && empty($errors) === true) {
-
-        $register_data = array(
-            'meno'  => $_POST['meno'],
-            'email' => $_POST['email'],
-            'heslo' => $_POST['heslo']
-        );
-
-        register_user($register_data);
-
-        header('Location: index.php?success');
-        exit();
-
-    } else if (empty($errors) === false) {
-        echo error_output($errors);
-    }
-?>
-
-<form class="register-form" action="" method="post">
+<form class="register-form" action="register.php" method="post">
 
     <a href="#" class="close-btn">X</a>
 
@@ -50,7 +27,7 @@
         </li>
 
         <li class="login-li">
-            <input type="submit" value="REGISTRUJ MA">
+            <input type="submit" name="register" value="REGISTRUJ MA">
         </li>
 
 

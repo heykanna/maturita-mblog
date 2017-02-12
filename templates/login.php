@@ -13,7 +13,7 @@
         </li>
 
         <li class="login-li">
-            <input type="submit" value="LOGIN">
+            <input name="login" type="submit" value="LOGIN">
         </li>
 
         <li>

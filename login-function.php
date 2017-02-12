@@ -1,31 +1,29 @@
 <?php
 
-    include 'db/init.php';
+    require ('db/connect.php');
 
+    session_start();
 
-    if (empty($_POST) === false) {
-
-        $meno = $_POST['meno'];
+    if(isset($_POST['login'])) {
+        $meno  = $_POST['meno'];
         $heslo = $_POST['heslo'];
+        $heslo = md5($heslo);
 
-        if (empty($meno) === true || empty($heslo) === true) {
-            $errors[] = 'Zadajte meno & heslo';
-        } else if (user_exists($meno) === false) {
-            $errors[] = 'Uživateľ neexistuje';
+        $sql = "SELECT * from users WHERE meno LIKE '{$meno}' AND heslo LIKE '{$heslo}' LIMIT 1";
+        $result = $db->query($sql);
+        if (!$result->num_rows == 1) {
+            header("Location: index.php?login_fail");
         } else {
-            $login = login($meno, $heslo);
-
-            if($login == false) {
-                $errors[] = 'Nesprávne meno alebo heslo';
-            } else {
-                $_SESSION['user_id'] = $login;
-                header('Location: index.php?logged');
-                exit();
-            }
+            $row = $result->fetch_assoc();
+            $id = $row['user_id'];
+            $admin = $row['admin'];
+            $email = $row['email'];
+            $_SESSION['id'] = $id;
+            $_SESSION['meno'] = $meno;
+            $_SESSION['admin'] = $admin;
+            $_SESSION['email'] = $email;
+            header("Location: index.php?logged");
         }
-
-        echo error_output($errors);
-
     }
 
 ?>

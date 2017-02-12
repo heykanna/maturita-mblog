@@ -33,7 +33,11 @@
     }
 
     function login_check() {
-        return (isset($_SESSION['user_id'])) ? true : false;
+        if(isset($_SESSION['id'])) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function user_exists($meno) {
